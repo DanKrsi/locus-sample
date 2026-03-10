@@ -1,4 +1,7 @@
-"""Margin check for the demo bracket."""
+"""Margin check for the demo bracket.
+
+Loads are limit loads; factors are applied here.
+"""
 
 FACTORS = {"ultimate": 1.4, "yield": 1.25}  # NASA-STD-5001B Table 1
 FITTING = 1.15  # bolts only, NASA-STD-5020B
@@ -6,6 +9,8 @@ FITTING = 1.15  # bolts only, NASA-STD-5020B
 
 def margin(allowable, load, factor=FACTORS["ultimate"]):
     """Margin of safety: allowable / (load x factor) - 1."""
+    if load <= 0:
+        return float("inf")
     return allowable / (load * factor) - 1
 
 
