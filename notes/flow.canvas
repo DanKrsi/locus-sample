@@ -1,0 +1,21 @@
+{
+	"nodes":[
+		{"id":"cases","type":"group","label":"for case in cases","x":40,"y":138,"width":336,"height":524},
+		{"id":"parts","type":"group","label":"for part in parts","x":72,"y":186,"width":272,"height":448},
+		{"id":"start","type":"text","shape":"terminal","text":"check(cases, parts)\n[check()](/src/margins.py#L12&at=79fe4364be \"def check(cases, parts):\")","x":124,"y":0,"width":168,"height":72},
+		{"id":"factor","type":"text","shape":"process","text":"Pick the factor\n[fitting for bolts](/src/margins.py#L17&at=79fe4364be \"factor = FACTORS[\\\"ultimate\\\"] * (FITTING if part.is_bolt else 1)\")","x":124,"y":234,"width":168,"height":80},
+		{"id":"ms","type":"text","shape":"process","text":"Compute the margin\n[margin()](/src/margins.py#L7&at=79fe4364be \"def margin(allowable, load, factor=FACTORS[\\\"ultimate\\\"]):\")","x":128,"y":334,"width":160,"height":80},
+		{"id":"ok","type":"text","shape":"decision","text":"MS < 0?","x":116,"y":434,"width":184,"height":88},
+		{"id":"flag","type":"text","shape":"process","text":"Add to the redesign list\n[failed.append](/src/margins.py#L20&at=79fe4364be \"failed.append((case.name, part.name, ms))\")","x":104,"y":542,"width":208,"height":64},
+		{"id":"done","type":"text","shape":"terminal","text":"Return the list\n[return](/src/margins.py#L21&at=79fe4364be \"return failed\")","x":0,"y":718,"width":144,"height":56}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"start","toNode":"factor","toEnd":"arrow","route":"elbow","fromSide":"bottom","toSide":"top"},
+		{"id":"e2","fromNode":"factor","toNode":"ms","toEnd":"arrow","route":"elbow","fromSide":"bottom","toSide":"top"},
+		{"id":"e3","fromNode":"ms","toNode":"ok","toEnd":"arrow","route":"elbow","fromSide":"bottom","toSide":"top"},
+		{"id":"e4","fromNode":"ok","toNode":"flag","toEnd":"arrow","route":"elbow","label":"yes","fromSide":"bottom","toSide":"top"},
+		{"id":"e5","fromNode":"flag","toNode":"factor","toEnd":"arrow","route":"elbow","label":"next part","fromSide":"right","toSide":"right","style":"dashed","points":[{"x":330,"y":574},{"x":330,"y":274}]},
+		{"id":"e6","fromNode":"ok","toNode":"factor","toEnd":"arrow","route":"elbow","label":"no","fromSide":"right","toSide":"right","style":"dashed","points":[{"x":322,"y":478},{"x":322,"y":274}]},
+		{"id":"e7","fromNode":"cases","toNode":"done","toEnd":"arrow","route":"elbow","label":"all cases checked","fromSide":"bottom","toSide":"top"}
+	]
+}
